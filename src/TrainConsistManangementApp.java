@@ -1,5 +1,5 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrainConsistManangementApp {
 
@@ -7,25 +7,22 @@ public class TrainConsistManangementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // ✅ Create LinkedHashSet to maintain order + uniqueness
-        Set<String> trainFormation = new LinkedHashSet<>();
+        // ✅ Create a HashMap to store bogie name → capacity
+        Map<String, Integer> bogieCapacity = new HashMap<>();
 
-        // ✅ Add bogies
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+        // ✅ Insert capacities for passenger bogies
+        bogieCapacity.put("Sleeper", 72);
+        bogieCapacity.put("AC Chair", 60);
+        bogieCapacity.put("First Class", 40);
 
-        // ✅ Attempt to add duplicate
-        trainFormation.add("Sleeper"); // ignored automatically
-
-        // ✅ Display final formation
-        System.out.println("\nFinal Train Formation:");
-        for (String bogie : trainFormation) {
-            System.out.println(bogie);
+        // ✅ Display bogie capacities
+        System.out.println("\nBogie Capacity Details:");
+        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
+            System.out.println(entry.getKey() + " → " + entry.getValue() + " seats");
         }
 
-        // Display total count
-        System.out.println("\nTotal bogies: " + trainFormation.size());
+        // ✅ Example: lookup capacity quickly
+        String bogieToCheck = "AC Chair";
+        System.out.println("\nCapacity of " + bogieToCheck + ": " + bogieCapacity.get(bogieToCheck) + " seats");
     }
 }
