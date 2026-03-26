@@ -1,5 +1,21 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Bogie {
+    String name;
+    int capacity;
+
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + capacity + " seats)";
+    }
+}
 
 public class TrainConsistManangementApp {
 
@@ -7,22 +23,23 @@ public class TrainConsistManangementApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // ✅ Create a HashMap to store bogie name → capacity
-        Map<String, Integer> bogieCapacity = new HashMap<>();
+        // ✅ Create a list to store passenger bogies
+        List<Bogie> passengerBogies = new ArrayList<>();
 
-        // ✅ Insert capacities for passenger bogies
-        bogieCapacity.put("Sleeper", 72);
-        bogieCapacity.put("AC Chair", 60);
-        bogieCapacity.put("First Class", 40);
+        // ✅ Add bogies
+        passengerBogies.add(new Bogie("Sleeper", 72));
+        passengerBogies.add(new Bogie("AC Chair", 60));
+        passengerBogies.add(new Bogie("First Class", 40));
 
-        // ✅ Display bogie capacities
-        System.out.println("\nBogie Capacity Details:");
-        for (Map.Entry<String, Integer> entry : bogieCapacity.entrySet()) {
-            System.out.println(entry.getKey() + " → " + entry.getValue() + " seats");
+        // ✅ Sort bogies by capacity (descending)
+        passengerBogies.sort(Comparator.comparingInt(b -> b.capacity));
+        // For descending order: Comparator.comparingInt(Bogie::getCapacity).reversed();
+        // Here using lambda for simplicity
+
+        // ✅ Display sorted bogies
+        System.out.println("\nPassenger Bogies Sorted by Capacity:");
+        for (Bogie bogie : passengerBogies) {
+            System.out.println(bogie);
         }
-
-        // ✅ Example: lookup capacity quickly
-        String bogieToCheck = "AC Chair";
-        System.out.println("\nCapacity of " + bogieToCheck + ": " + bogieCapacity.get(bogieToCheck) + " seats");
     }
 }
